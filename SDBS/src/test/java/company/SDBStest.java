@@ -1,3 +1,4 @@
+/*
 package company;
 
 import org.openqa.selenium.WebDriver;
@@ -15,16 +16,17 @@ import static java.lang.System.setProperty;
 public class SDBStest {
 
     private static final String URL          = "http://47.254.147.178";
-  /*  private static final String username     = "sa";
-    private static final String password     = "sa";*/
+    private static final String username     = "sa";
+    private static final String password     = "sa";
 
     private static final String LOGIN_MATCH  = "Substrate DB";
 
     private LoginPage           loginPage;
 
-    @DataProvider (name="loginCreds")
+    */
+/*@DataProvider (name="loginCreds")
     public Object [][] credsData(){
-        Object [][] creds = new Object [4][2];
+        Object [][] creds = new Object [1][2];
         creds[0][0] = "sa";
         creds[0][1] = "sa";
         creds[1][0] = "admin";
@@ -35,9 +37,11 @@ public class SDBStest {
         creds[3][1] = "pa$$word";
 
         return creds;
-    }
+    }*//*
 
-   /* @DataProvider (name="loginInvalidCreds")
+
+   */
+/* @DataProvider (name="loginInvalidCreds")
     public Object [][] invCredsData(){
         Object [][] creds = new Object [2][2];
         creds[0][0] = "sasa";
@@ -56,7 +60,8 @@ public class SDBStest {
         roles[1]= "SERVICE";
 
         return roles;
-    }*/
+    }*//*
+
 
     private static WebDriverWait wait;
     private static WebDriver driver;
@@ -76,32 +81,47 @@ public class SDBStest {
         Assert.assertEquals ( LOGIN_MATCH , loginPage.getPageTitle () );
         System.out.println (driver.getTitle ());
         System.out.println (loginPage.getPageTitle ());
+        System.out.println ("Hello");
     }
 
-    @Test(dataProvider = "loginCreds"/*, dependsOnMethods = "pageTitleMethod"*/)
-    public void loginMethod (String username, String password ) throws InterruptedException {
+    @Test(*/
+/*dataProvider = "loginCreds"*//*
+*/
+/*, dependsOnMethods = "pageTitleMethod"*//*
+)
+    public void loginAdmin (String username, String password ) throws InterruptedException {
 
         loginPage.login ( username , password );
-        Thread.sleep ( 3000 );
 
-        /*System.out.println (driver.getTitle ());
-        System.out.println (correctUser.getText ());*/
+
+        */
+/*System.out.println (driver.getTitle ());
+        System.out.println (correctUser.getText ());*//*
+
               // Assert.assertEquals ( userRolesData () , correctUser.getText () );
-      /*  Assert.assertEquals ( "ADMIN" , correctUser.getText () );
+      */
+/*  Assert.assertEquals ( "ADMIN" , correctUser.getText () );
         Assert.assertEquals ( "QUALIFICATION TEAM" , correctUser.getText () );
-        Assert.assertEquals ( "SERVICE" , correctUser.getText () );*/
+        Assert.assertEquals ( "SERVICE" , correctUser.getText () );*//*
+
     }
 
-    @Test(dataProvider = "loginInvalidCreds" /*dependsOnMethods = "loginMethod"*/)
+    @Test(*/
+/*dataProvider = "loginInvalidCreds"*//*
+ */
+/*dependsOnMethods = "loginMethod"*//*
+)
     public void loginInvMethod (String username, String password ) throws InterruptedException {
 
         loginPage.login ( "" , "");
         Assert.assertEquals ( LOGIN_MATCH , loginPage.getPageTitle () );
 
-        /*inboxPage.waitUserLogoToAppear ();
+        */
+/*inboxPage.waitUserLogoToAppear ();
         System.out.println (inboxPage.userLogoName.getText ());
          Assert.assertEquals ( user , loginPage.correctUser.getText() );
-        Assert.assertEquals ( CORRECT_USER , inboxPage.userLogoName.getText () );*/
+        Assert.assertEquals ( CORRECT_USER , inboxPage.userLogoName.getText () );*//*
+
     }
 
 
@@ -120,3 +140,4 @@ public void tearDown2 ( ) {
     }
 
 }
+*/
