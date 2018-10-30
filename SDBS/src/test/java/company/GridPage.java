@@ -15,17 +15,17 @@ public class GridPage {
     private WebDriver driver;
 
 
-  @FindBy (xpath = "//div/block-ui/app-header/mat-toolbar/button[2]")
-    WebElement correctUser;
+    @FindBy(xpath = "//div/block-ui/app-header/mat-toolbar/button[2]")
+    private WebElement correctUser;
 
-    @FindBy (xpath = "//div/block-ui/app-header/mat-toolbar/button")
+    @FindBy(xpath = "//div/block-ui/app-header/mat-toolbar/button")
     WebElement correctUserService;
 
-    @FindBy (xpath = "//button//span[3]/span")
-    WebElement roleMenu;
+    @FindBy(xpath = "//button//span[3]/span")
+    private WebElement roleMenu;
 
     @FindBy(xpath = "//div[@class='cdk-overlay-container']//button")
-    WebElement logOutButton;
+    private WebElement logOutButton;
 
 
     WebDriverWait wait;
@@ -37,15 +37,23 @@ public class GridPage {
     }
 
 
-       public GridPage grid ( ) throws InterruptedException {
-//Thread.sleep ( 2500 );
-          wait.until ( ExpectedConditions.elementToBeClickable ( roleMenu ) );
+         public GridPage gridLogOut ( ) throws InterruptedException {
+
+           wait.until ( ExpectedConditions.elementToBeClickable ( roleMenu ) );
            new Actions ( driver ).doubleClick ( roleMenu ).build ().perform ();
            wait.until ( ExpectedConditions.elementToBeClickable ( logOutButton ) );
            new Actions ( driver ).doubleClick ( logOutButton ).build ().perform ();
-        logOutButton.click ();
 
-        return new GridPage ( this.driver );
+         return new GridPage ( this.driver );
+    }
+
+    public SettingsPage grid ( ) {
+
+                return new SettingsPage ( this.driver );
+    }
+
+    public String getCorrectUser ( ) {
+        return correctUser.getText ();
     }
 
 }

@@ -1,13 +1,15 @@
 package company;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SettingsPage {
+import java.util.List;
+
+public class SettingsPage  {
 
     private WebDriver driver;
     WebDriverWait wait;
@@ -15,68 +17,84 @@ public class SettingsPage {
 
     public SettingsPage ( WebDriver driver ) {
         this.driver = driver;
-        wait = new WebDriverWait ( driver , 20 , 100 );
+        wait = new WebDriverWait ( driver , 25 , 60 );
         PageFactory.initElements ( this.driver , this );
     }
 
     @FindBy(xpath = "//button//mat-icon[contains(text(),'settings')]")
-    WebElement settings;
-
+    private WebElement settings;
     @FindBy (xpath = "//button/span [contains(text(), \"Add User\")]")
-    WebElement addUserButton;
-
+    private WebElement addUserButton;
     @FindBy (xpath = "//div/input [@placeholder= \"Login\"]")
-    WebElement addUserLoginField;
-
+    private WebElement addUserLoginField;
     @FindBy (xpath = "//div/input [@placeholder= \"First Name\"]")
-    WebElement addUserFNameField;
-
+    private WebElement addUserFNameField;
     @FindBy (xpath = "//div/input [@placeholder= \"Last Name\"]")
-    WebElement addUserLNameField;
-
+    private WebElement addUserLNameField;
     @FindBy (xpath = "//div/span[contains(text(), \"Role\")]")
-    WebElement addUserRoleField;
-
+    private WebElement addUserRoleField;
     @FindBy (xpath = "//div/mat-option/span[contains(text(), \"Admin\")]")
-    WebElement addUserRoleAdmin;
-
+    private WebElement addUserRoleAdmin;
     @FindBy (xpath = "//div/mat-option/span[contains(text(), \"Qualification Team\")]")
-    WebElement addUserRoleQT;
-
+    private WebElement addUserRoleQT;
     @FindBy (xpath = "//div/mat-option/span[contains(text(), \"Service\")]")
-    WebElement addUserRoleService;
-
+    private WebElement addUserRoleService;
     @FindBy (xpath = "//div/mat-form-field//input [@placeholder= \"Customer\"]")
-    WebElement addUserCustomerField;
-
+    private WebElement addUserCustomerField;
     @FindBy (xpath = "//div//span [contains(text(), \"CMYK\")]")
-    WebElement addUserCustomerCMYK;
-
+    private WebElement addUserCustomerCMYK;
     @FindBy (xpath = "//div/input [@placeholder= \"Email\"]")
-    WebElement addUserEmailField;
-
+    private WebElement addUserEmailField;
     @FindBy (xpath = "//button/span [contains(text(), \"Create User\")]")
-    WebElement addUserCreateButton;
+    private WebElement addUserCreateButton;
+    @FindBy (xpath = "//mat-cell[contains(text(), 'UserLogin')]")
+    private WebElement userHasBeenCreated;
+
+    @FindBy (xpath = "//div[@class='table-container']//mat-table[@role='grid']")
+    private WebElement userList;
+
+    String userLogin = "UserLogin";
 
 
+    public SettingsAddCustomerPage popupUser () throws InterruptedException {
+
+        Thread.sleep ( 3000 );
+
+        wait.until ( ExpectedConditions.elementToBeClickable ( settings ) ).click ();
 
 
-    public SettingsPage popup (){
+        addUserButton.click ();
+        addUserLoginField.sendKeys ( userLogin );
+        addUserFNameField.sendKeys ( "FirstName" );
+        addUserLNameField.sendKeys ( "LastName" );
+        addUserRoleField.click ();
+        addUserRoleAdmin.click ();
+        addUserCustomerField.click ();
+        addUserCustomerCMYK.click ();
+        addUserEmailField.sendKeys ( "user@test.io" );
+        addUserCreateButton.click ();
 
-settings.click ();
-wait.until( ExpectedConditions.elementToBeClickable ( addUserButton )).click ();
-addUserLoginField.sendKeys ( "UserLogin" );
-addUserFNameField.sendKeys ( "FirstName" );
-addUserLNameField.sendKeys ( "LastName" );
-addUserRoleField.click ();
-addUserRoleAdmin.click ();
-addUserCustomerField.click ();
-addUserCustomerCMYK.click ();
-addUserEmailField.sendKeys ( "user@test.io" );
-addUserCreateButton.click ();
 
-        return new SettingsPage ( this.driver );
+        return new SettingsAddCustomerPage ( this.driver );
+
+    }
+        public SettingsAddCustomerPage popupTab () throws InterruptedException {
+
+            return new SettingsAddCustomerPage ( this.driver );
     }
 
+    public boolean createUser () throws InterruptedException {
+        Thread.sleep ( 1000 );
+        List<WebElement> userNames;
+        userNames = driver.findElements( By.xpath("//div[@class='table-container']//mat-table[@role='grid']"));
+        Boolean          userNameIsPresent = false;
+        for (WebElement user : userNames) {
+            if (user.getText ().contains ( userLogin )) {
 
+                userNameIsPresent = true;
+                break;
+            }
+        }
+        return userNameIsPresent;
+    }
 }

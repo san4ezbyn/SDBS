@@ -34,7 +34,7 @@ public class LoginPage {
         return this.driver.getTitle ();
     }
 
-    public GridPage login ( String username , String password ) throws InterruptedException {
+    public GridPage login ( String username , String password, String roleAssert ) {
         loginField.clear ();
         loginField.sendKeys ( username );
         passwordField.clear ();
