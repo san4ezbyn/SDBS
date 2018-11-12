@@ -37,19 +37,19 @@ public class GridPage {
     }
 
 
-         public GridPage gridLogOut ( ) throws InterruptedException {
+    public GridPage gridLogOut ( ) throws InterruptedException {
 
-           wait.until ( ExpectedConditions.elementToBeClickable ( roleMenu ) );
-           new Actions ( driver ).doubleClick ( roleMenu ).build ().perform ();
-           wait.until ( ExpectedConditions.elementToBeClickable ( logOutButton ) );
-           new Actions ( driver ).doubleClick ( logOutButton ).build ().perform ();
+        wait.until ( ExpectedConditions.elementToBeClickable ( roleMenu ) );
+        new Actions ( driver ).doubleClick ( roleMenu ).build ().perform ();
+        wait.until ( ExpectedConditions.elementToBeClickable ( logOutButton ) );
+        new Actions ( driver ).doubleClick ( logOutButton ).build ().perform ();
 
-         return new GridPage ( this.driver );
+        return new GridPage ( this.driver );
     }
 
     public SettingsPage grid ( ) {
 
-                return new SettingsPage ( this.driver );
+        return new SettingsPage ( this.driver );
     }
 
     public String getCorrectUser ( ) {

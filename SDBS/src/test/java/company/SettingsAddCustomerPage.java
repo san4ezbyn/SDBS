@@ -44,6 +44,7 @@ public class SettingsAddCustomerPage {
         @FindBy (xpath = "//div[@class='table-container']//mat-table[@role='grid']")
         private WebElement listOfCustomers;
 
+
         String customerLSN = "cusLSN";
 
 
